@@ -142,7 +142,7 @@ namespace DAY33_ADO.NETAddressBookPP
             {
                 string query = @"Select Address from AddressBook where FirstName='Sahana';";
                 SqlCommand cmd = new SqlCommand(query, connection);
-                object res = cmd.ExecuteScalar();
+                object res = cmd.ExecuteScalar();//it executes and returns the first column or rows in the result set returned by the query
                 connection.Close();
                 addressmodel.Address = (string)res;
             }
