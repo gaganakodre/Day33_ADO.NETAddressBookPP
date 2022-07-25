@@ -44,6 +44,12 @@
                     addressBookRepo.DeletingTheContactUsingFirst();
                     Console.WriteLine("deleted the data sucessfully");
                     break;
+                case 7:
+                    int countCity = addressBookRepo.CountOfEmployeeDetailsByCity();
+                    Console.WriteLine("Count of Records for given City :" + countCity);
+                    int CountState = addressBookRepo.CountOfEmployeeDetailsByState();
+                    Console.WriteLine("Count of Records for given State :" + CountState);
+                    break;
 
 
 
