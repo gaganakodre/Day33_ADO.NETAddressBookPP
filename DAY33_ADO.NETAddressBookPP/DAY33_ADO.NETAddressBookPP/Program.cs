@@ -5,7 +5,8 @@
         public static void Main(string[] args)
         {
             
-            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable\n4.RetriveAllContact\n5.UpdatingToExisting");
+            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable\n" +
+                "4.RetriveAllContact\n5.UpdatingToExisting\n5.updateData\n6.DeletingThedata");
             int op = Convert.ToInt16(Console.ReadLine());
             AddressBookModel model = new AddressBookModel();
             AddressBookRepo addressBookRepo = new AddressBookRepo();
@@ -38,6 +39,10 @@
                 case 5:
                     addressBookRepo.updateEmployeeDetails();
                     Console.WriteLine("updated sucsessFully");
+                    break;
+                case 6:
+                    addressBookRepo.DeletingTheContactUsingFirst();
+                    Console.WriteLine("deleted the data sucessfully");
                     break;
 
 
