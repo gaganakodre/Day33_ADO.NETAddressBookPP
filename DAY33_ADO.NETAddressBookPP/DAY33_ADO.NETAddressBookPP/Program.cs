@@ -6,7 +6,7 @@
         {
             
             Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable\n" +
-                "4.RetriveAllContact\n5.UpdatingToExisting\n5.updateData\n6.DeletingThedata");
+                "4.RetriveAllContact\n5.UpdatingToExisting\n5.updateData\n6.DeletingThedata\n7.CountingDataUsingStateOrCity\n8.SortingAlphabetically");
             int op = Convert.ToInt16(Console.ReadLine());
             AddressBookModel model = new AddressBookModel();
             AddressBookRepo addressBookRepo = new AddressBookRepo();
@@ -49,6 +49,10 @@
                     Console.WriteLine("Count of Records for given City :" + countCity);
                     int CountState = addressBookRepo.CountOfEmployeeDetailsByState();
                     Console.WriteLine("Count of Records for given State :" + CountState);
+                    break;
+                case 8:
+                    Console.WriteLine("Get Contacts for given City alphabetically sorted by FirstName");
+                    addressBookRepo.GetContactsInAlphabeticalOrderOfFirstName();
                     break;
 
 
