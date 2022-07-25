@@ -9,7 +9,7 @@ namespace DAY33_ADO.NETAddressBookPP
 {
     public class AddressBookRepo
     {
-        public const string ConnFile = @"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressbookForADO; Integrated Security = True;";
+        public const string ConnFile = @"Data Source=(localdb)\ProjectModels; Initial Catalog =Addressbook_ADO; Integrated Security = True;";
         SqlConnection connection = new SqlConnection(ConnFile);
         public void Create_Database()
         {
@@ -78,6 +78,52 @@ namespace DAY33_ADO.NETAddressBookPP
             }
 
             return false;
+        }
+        public void RetriveAllContact()
+        {
+            try
+            {
+                AddressBookModel addressmodel = new AddressBookModel();
+                using (this.connection)
+                {
+                    string Query = @"Select * from AddressBook";
+                    SqlCommand cmd = new SqlCommand(Query, this.connection);
+                    this.connection.Open();
+                    SqlDataReader datareader = cmd.ExecuteReader();
+                    if (datareader.HasRows)
+                    {
+                        while (datareader.Read())
+                        {
+                            addressmodel.ID = datareader.GetInt32(0);
+                            addressmodel.FirstName = datareader.GetString(1);
+                            addressmodel.LastName = datareader.GetString(2);
+                            addressmodel.Address = datareader.GetString(3);
+                            addressmodel.City = datareader.GetString(4);
+                            addressmodel.State = datareader.GetString(5);
+                            addressmodel.Zip = datareader.GetString(6);
+                            addressmodel.PhoneNumber = datareader.GetString(7);
+                            addressmodel.Email = datareader.GetString(8);
+
+                            Console.WriteLine(addressmodel.FirstName + " " +
+                                addressmodel.LastName + " " +
+                                addressmodel.Address + " " +
+                                addressmodel.City + " " +
+                                addressmodel.State + " " +
+                                addressmodel.Zip + " " +
+                                addressmodel.PhoneNumber + " " +
+                                addressmodel.Email + " "
+
+                                );
+                            Console.WriteLine();
+
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }

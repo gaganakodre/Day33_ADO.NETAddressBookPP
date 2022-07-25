@@ -5,7 +5,7 @@
         public static void Main(string[] args)
         {
             
-            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable");
+            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable\n4.RetriveAllContact");
             int op = Convert.ToInt16(Console.ReadLine());
             AddressBookModel model = new AddressBookModel();
             AddressBookRepo addressBookRepo = new AddressBookRepo();
@@ -29,7 +29,13 @@
                     model.PhoneNumber = "990865976";
                     model.Email = "shree@gmail.com";
                     addressBookRepo.AddContact(model);
+                    Console.WriteLine("Address insrted sucsses fully");
                     break;
+
+                case 4:
+                    addressBookRepo.RetriveAllContact();
+                    break;
+
 
 
 
