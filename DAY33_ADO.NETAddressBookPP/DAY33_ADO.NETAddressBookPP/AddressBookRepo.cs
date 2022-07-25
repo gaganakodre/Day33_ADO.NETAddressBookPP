@@ -10,17 +10,18 @@ namespace DAY33_ADO.NETAddressBookPP
     public class AddressBookRepo
     {
         public const string ConnFile = @"Data Source=(localdb)\ProjectModels; Initial Catalog =Addressbook_ADO; Integrated Security = True;";
-        SqlConnection connection = new SqlConnection(ConnFile);
+        SqlConnection connection = new SqlConnection(ConnFile);//it represents the connection to the sql server
         public void Create_Database()
         {
             try
             {
                 SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =master; Integrated Security = True;");
-                Connection.Open();
+                Connection.Open();//opens database connection with the propety specified by connection
                 SqlCommand command = new SqlCommand("Create database Addressbook_ADO;", Connection);
-                command.ExecuteNonQuery();
+                //repersent a statement execute procedure aganist the sql server database
+                command.ExecuteNonQuery();//executes sql statement against connection aganist and retuns the numbers of rows affected
                 Console.WriteLine("AddressbookService Database created successfully!");
-                Connection.Close();
+                Connection.Close();//closes the connection to the database
             }
             catch (Exception e)
             {
@@ -47,11 +48,13 @@ namespace DAY33_ADO.NETAddressBookPP
         {
             try
             {
-                using (this.connection)
-                {
+                using (this.connection)//we use the this block and it is key word used to push the object to garbage collecters.
+                {//to execute the connection aganist the sql server
                     SqlCommand cmd = new SqlCommand("SpAddressBook", this.connection);
+                    //gets or sets the value to the indicating how the value to be interupted
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("@FirstName", model.FirstName);
+                    //adding values to the end of the collections
+                    cmd.Parameters.AddWithValue("@FirstName", model.FirstName);//paramertes of the table
                     cmd.Parameters.AddWithValue("@LastName", model.LastName);
                     cmd.Parameters.AddWithValue("@Address", model.Address);
                     cmd.Parameters.AddWithValue("@City", model.City);
@@ -89,7 +92,8 @@ namespace DAY33_ADO.NETAddressBookPP
                     string Query = @"Select * from AddressBook";
                     SqlCommand cmd = new SqlCommand(Query, this.connection);
                     this.connection.Open();
-                    SqlDataReader datareader = cmd.ExecuteReader();
+                    SqlDataReader datareader = cmd.ExecuteReader();//it provides the way of reading the rows from the sql server database
+                    //sends the sqlcmdtext to sql cmd
                     if (datareader.HasRows)
                     {
                         while (datareader.Read())
@@ -154,14 +158,14 @@ namespace DAY33_ADO.NETAddressBookPP
                 using (this.connection)
                 {
                     string Query = @"Delete from AddressBook where FirstName='Shree';";
-                    SqlCommand cmd = new SqlCommand(Query, this.connection);
+                    SqlCommand cmd = new SqlCommand(Query, this.connection);//executes the query to execute aganist the sql server to db
                     this.connection.Open();
                     SqlDataReader datareader = cmd.ExecuteReader();
                     if (datareader.HasRows)
                     {
-                        while (datareader.Read())
+                        while (datareader.Read())//advances data to the next record
                         {
-                            addressmodel.ID = datareader.GetInt32(0);
+                            addressmodel.ID = datareader.GetInt32(0);//it returns the value of specific columns
                             addressmodel.FirstName = datareader.GetString(1);
                             addressmodel.LastName = datareader.GetString(2);
                             addressmodel.Address = datareader.GetString(3);
