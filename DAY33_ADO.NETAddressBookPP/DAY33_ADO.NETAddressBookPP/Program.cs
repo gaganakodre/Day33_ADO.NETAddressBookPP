@@ -5,8 +5,9 @@
         public static void Main(string[] args)
         {
             
-            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable");
+            Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable");
             int op = Convert.ToInt16(Console.ReadLine());
+            AddressBookModel model = new AddressBookModel();
             AddressBookRepo addressBookRepo = new AddressBookRepo();
 
             switch (op)
@@ -16,6 +17,18 @@
                     break;
                  case 2:
                     addressBookRepo.CreateTables();
+                    break;
+                case 3:
+
+                    model.FirstName = "Shree";
+                    model.LastName = "Gowri";
+                    model.Address = "RR nagara";
+                    model.City = "Bangalore";
+                    model.State = "Karnataka";
+                    model.Zip = "456079";
+                    model.PhoneNumber = "990865976";
+                    model.Email = "shree@gmail.com";
+                    addressBookRepo.AddContact(model);
                     break;
 
 
