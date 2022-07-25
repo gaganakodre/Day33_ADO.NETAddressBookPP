@@ -6,7 +6,8 @@
         {
             
             Console.WriteLine("Select option\n1.Create AddrssBookServiceDatabase\n2.CreateTable\n3.InsertTntoTable\n" +
-                "4.RetriveAllContact\n5.UpdatingToExisting\n5.updateData\n6.DeletingThedata\n7.CountingDataUsingStateOrCity\n8.SortingAlphabetically");
+                "4.RetriveAllContact\n5.UpdatingToExisting\n5.updateData\n6.DeletingThedata\n7.CountingDataUsingStateOrCity" +
+                "\n8.SortingAlphabetically\n9.GetContactsBYAddressBookType\n10.CountOfEmployeeDetailsByType\n11.AddContactAsFriendAndFamily");
             int op = Convert.ToInt16(Console.ReadLine());
             AddressBookModel model = new AddressBookModel();
             AddressBookRepo addressBookRepo = new AddressBookRepo();
@@ -61,6 +62,10 @@
                 case 10:
                     int countByType = addressBookRepo.CountOfEmployeeDetailsByType();
                     Console.WriteLine("Count of Records by Type Friend :" + countByType);
+                    break;
+                case 11:
+                    addressBookRepo.AddContactAsFriendAndFamily();
+                    Console.WriteLine("Added Contact to both Family and Friend");
                     break;
 
 
