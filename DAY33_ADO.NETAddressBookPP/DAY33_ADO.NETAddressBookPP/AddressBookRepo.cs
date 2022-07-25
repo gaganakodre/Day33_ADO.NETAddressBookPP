@@ -125,5 +125,26 @@ namespace DAY33_ADO.NETAddressBookPP
                 Console.WriteLine(e.Message);
             }
         }
+        public string updateEmployeeDetails()
+        {
+            AddressBookModel addressmodel = new AddressBookModel();
+
+            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBook_ADO; Integrated Security = True;");
+            connection.Open();
+            SqlCommand command = new SqlCommand("update AddressBook set Address='RTC Layout' where FirstName='Sahana'", connection);
+
+            int effectedRow = command.ExecuteNonQuery();
+            if (effectedRow == 1)
+            {
+                string query = @"Select Address from AddressBook where FirstName='Sahana';";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                object res = cmd.ExecuteScalar();
+                connection.Close();
+                addressmodel.Address = (string)res;
+            }
+            connection.Close();
+            return (addressmodel.Address);
+
+        }
     }
 }
