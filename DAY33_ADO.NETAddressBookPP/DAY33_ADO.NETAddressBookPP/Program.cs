@@ -54,6 +54,10 @@
                     Console.WriteLine("Get Contacts for given City alphabetically sorted by FirstName");
                     addressBookRepo.GetContactsInAlphabeticalOrderOfFirstName();
                     break;
+                case 9:
+                    Console.WriteLine("Ability to identify each Address Book with name and Type.");
+                    addressBookRepo.GetContactsBYAddressBookType();
+                    break;
 
 
 
