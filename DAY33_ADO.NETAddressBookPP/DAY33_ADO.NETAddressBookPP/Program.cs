@@ -58,6 +58,10 @@
                     Console.WriteLine("Ability to identify each Address Book with name and Type.");
                     addressBookRepo.GetContactsBYAddressBookType();
                     break;
+                case 10:
+                    int countByType = addressBookRepo.CountOfEmployeeDetailsByType();
+                    Console.WriteLine("Count of Records by Type Friend :" + countByType);
+                    break;
 
 
 

@@ -50,7 +50,7 @@ namespace DAY33_ADO.NETAddressBookPP
                 using (this.connection)
                 {
                     SqlCommand cmd = new SqlCommand("SpAddressBook", this.connection);
-                    cmd.CommandType = System.Data.CommandType.StoredProcedure; 
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@FirstName", model.FirstName);
                     cmd.Parameters.AddWithValue("@LastName", model.LastName);
                     cmd.Parameters.AddWithValue("@Address", model.Address);
@@ -221,7 +221,7 @@ namespace DAY33_ADO.NETAddressBookPP
             try
             {
                 AddressBookModel addressmodel = new AddressBookModel();
-                SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+                SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBook_ADO; Integrated Security = True;");
                 using (this.connection)
                 {
                     string Query = @"Select * from AddressBook where City='Bangalore' order by FirstName;";
@@ -260,9 +260,11 @@ namespace DAY33_ADO.NETAddressBookPP
                 Console.WriteLine(e.Message);
             }
         }
+
+
         public void AddAddressBookNameAndType()
         {
-            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBook_ADO; Integrated Security = True;");
             connection.Open();
             string query = @"alter table AddressBook add AddressBookName Varchar(50), AddressBookType Varchar(50);";
             SqlCommand command = new SqlCommand(query, connection);
@@ -274,7 +276,7 @@ namespace DAY33_ADO.NETAddressBookPP
             try
             {
                 AddressBookModel addressmodel = new AddressBookModel();
-                SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBookForADO; Integrated Security = True;");
+                SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBook_ADO; Integrated Security = True;");
                 using (this.connection)
                 {
                     string Query = @"Select * from AddressBook where AddressBookType='Friend';";
@@ -317,6 +319,18 @@ namespace DAY33_ADO.NETAddressBookPP
             {
                 Console.WriteLine(e.Message);
             }
+        }
+        public int CountOfEmployeeDetailsByType()
+        {
+            int count;
+            SqlConnection Connection = new SqlConnection(@"Data Source=(localdb)\ProjectModels; Initial Catalog =AddressBook_ADO; Integrated Security = True;");
+            connection.Open();
+            string Query = @"Select count(*) from AddressBook where AddressBookType='Friend';";
+            SqlCommand command = new SqlCommand(Query, connection);
+            object res = command.ExecuteScalar();
+            connection.Close();
+            int Count = (int)res;
+            return Count;
         }
     }
 }
