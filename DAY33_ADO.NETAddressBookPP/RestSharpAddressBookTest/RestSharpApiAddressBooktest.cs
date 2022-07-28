@@ -115,5 +115,32 @@ namespace RestSharpAddressBook
             List<AddressBook> dataResorce = JsonConvert.DeserializeObject<List<AddressBook>>(response.Content);
             Assert.AreEqual(6, dataResorce.Count);
         }
+        [Test]
+        public void GivenEmployee_WhenUpdateSalary_ThenShouldReturnUpdatedEmployeeSalary()
+        {
+            RestRequest request = new RestRequest("/AddressBook/1", Method.Put);
+            JsonObject jObjectBody = new JsonObject();
+            jObjectBody.Add("FirstName", "gajannana");
+            jObjectBody.Add("LastName", "jhonny");
+            jObjectBody.Add("PhoneNumber", "91000654344");
+            jObjectBody.Add("Address", "circlenagara");
+            jObjectBody.Add("City", "sfdhs");
+            jObjectBody.Add("State", "Ap");
+            jObjectBody.Add("Zip", "1234");
+            jObjectBody.Add("email", "gagananna@gmail.com");
+            request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
+            RestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            AddressBook dataResorce = JsonConvert.DeserializeObject<AddressBook>(response.Content);
+            Assert.AreEqual("gajannana", dataResorce.FirstName);
+            Assert.AreEqual("jhonny", dataResorce.LastName);
+            Assert.AreEqual("91000654344", dataResorce.PhoneNumber);
+            Assert.AreEqual("circlenagara", dataResorce.Address);
+            Assert.AreEqual("City", dataResorce.City);
+            Assert.AreEqual("State", dataResorce.State);
+            Assert.AreEqual("Zip", dataResorce.Zip);
+            Assert.AreEqual("mouna@gmail.com", dataResorce.Email); ;
+            Console.WriteLine(response.Content);
+        }
     }
 }
