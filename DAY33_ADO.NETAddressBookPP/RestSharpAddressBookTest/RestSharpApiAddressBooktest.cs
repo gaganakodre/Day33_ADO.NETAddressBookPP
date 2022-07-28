@@ -75,5 +75,45 @@ namespace RestSharpAddressBook
             Assert.AreEqual("ganesha@gmail.com", dataResponse.Email);
 
         }
+        [Test]
+        public void GivenMultipleEmployee_OnPost_ThenShouldReturnEmployeeList()
+        {
+            List<AddressBook> contactList = new List<AddressBook>();
+            contactList.Add(new AddressBook { FirstName = "Ananya", LastName = "Raghu", PhoneNumber = "8877456345", Address = "abc layout", City = "Hydrabad", State = "Telangana", Zip = "147677", Email = "sgf@gmail.com" });
+            contactList.Add(new AddressBook { FirstName = "sharanya", LastName = "yk", PhoneNumber = "7356456345", Address = "Feroz Shah Kotla", City = "VishakaPatnam", State = "Andrapradesh", Zip = "247677", Email = "gsd@gmail.com" });
+            contactList.Add(new AddressBook { FirstName = "jhnavi", LastName = "shekar", PhoneNumber = "6577456345", Address = "Feroz Shah Kotla", City = "Chennai", State = "TN", Zip = "347677", Email = "ads@gmail.com" });
+            contactList.Add(new AddressBook { FirstName = "mahesh", LastName = "b", PhoneNumber = "57577456345", Address = "Feroz Shah Kotla", City = "pudicheryy", State = "Goa", Zip = "447677", Email = "ascx@gmail.com" });
+            foreach (var ContactData in contactList)
+            {
+                RestRequest request = new RestRequest("/AddressBook", Method.Post);
+                JsonObject jObjectBody = new JsonObject();
+                jObjectBody.Add("FirstName", ContactData.FirstName);
+                jObjectBody.Add("LastName", ContactData.LastName);
+                jObjectBody.Add("PhoneNumber", ContactData.PhoneNumber);
+                jObjectBody.Add("Address", ContactData.Address);
+                jObjectBody.Add("City", ContactData.City);
+                jObjectBody.Add("State", ContactData.State);
+                jObjectBody.Add("Zip", ContactData.Zip);
+                jObjectBody.Add("Email", ContactData.Email);
+                request.AddParameter("application/json", jObjectBody, ParameterType.RequestBody);
+                RestResponse response1 = client.Execute(request);
+                Assert.AreEqual(response1.StatusCode, HttpStatusCode.Created);
+                AddressBook dataResorce1 = JsonConvert.DeserializeObject<AddressBook>(response1.Content);
+                Assert.AreEqual(ContactData.FirstName, dataResorce1.FirstName);
+                Assert.AreEqual(ContactData.LastName, dataResorce1.LastName);
+                Assert.AreEqual(ContactData.PhoneNumber, dataResorce1.PhoneNumber);
+                Assert.AreEqual(ContactData.Address, dataResorce1.Address);
+                Assert.AreEqual(ContactData.City, dataResorce1.City);
+                Assert.AreEqual(ContactData.State, dataResorce1.State);
+                Assert.AreEqual(ContactData.Zip, dataResorce1.Zip);
+                Assert.AreEqual(ContactData.Email, dataResorce1.Email);
+                System.Console.WriteLine(response1.Content);
+            };
+
+            RestResponse response = getAddressList();
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
+            List<AddressBook> dataResorce = JsonConvert.DeserializeObject<List<AddressBook>>(response.Content);
+            Assert.AreEqual(6, dataResorce.Count);
+        }
     }
 }
