@@ -124,7 +124,7 @@ namespace RestSharpAddressBook
             jObjectBody.Add("LastName", "jhonny");
             jObjectBody.Add("PhoneNumber", "91000654344");
             jObjectBody.Add("Address", "circlenagara");
-            jObjectBody.Add("City", "sfdhs");
+            jObjectBody.Add("City", "Durga");
             jObjectBody.Add("State", "Ap");
             jObjectBody.Add("Zip", "1234");
             jObjectBody.Add("email", "gagananna@gmail.com");
@@ -136,10 +136,18 @@ namespace RestSharpAddressBook
             Assert.AreEqual("jhonny", dataResorce.LastName);
             Assert.AreEqual("91000654344", dataResorce.PhoneNumber);
             Assert.AreEqual("circlenagara", dataResorce.Address);
-            Assert.AreEqual("City", dataResorce.City);
-            Assert.AreEqual("State", dataResorce.State);
-            Assert.AreEqual("Zip", dataResorce.Zip);
-            Assert.AreEqual("mouna@gmail.com", dataResorce.Email); ;
+            Assert.AreEqual("Durga", dataResorce.City);
+            Assert.AreEqual("Ap", dataResorce.State);
+            Assert.AreEqual("1234", dataResorce.Zip);
+            Assert.AreEqual("gagananna@gmail.com", dataResorce.Email); ;
+            Console.WriteLine(response.Content);
+        }
+        [Test]
+        public void GivenEmployeeId_WhenDelete_ThenShouldReturnSuccess()
+        {
+            RestRequest request = new RestRequest("/AddressBook/6", Method.Delete);
+            RestResponse response = client.Execute(request);
+            Assert.AreEqual(response.StatusCode, HttpStatusCode.OK);
             Console.WriteLine(response.Content);
         }
     }
