@@ -1,0 +1,28 @@
+{
+  "AddressBook": [
+    {
+      "id": 1,
+      "first_name": "Sebastian",
+      "last_name": "Eschweiler",
+      "phonenumber":"456765552",
+      "addressbook":"shree",
+      "city":"Bengaluru",
+      "state":"karnataka",
+      "zip":"1234",
+      "email": "sebastian@codingthesmartway.com"
+    },
+    
+    {
+      "id": 2,
+      "first_name": "Masha",
+      "last_name": "Bear",
+      "phonenumber":"455665552",
+      "addressbook":"Masha",
+      "city":"Mysore",
+      "state":"karnataka",
+      "zip":"1234",
+      "email": "MB@gmail.com"
+      
+    }
+  ]
+}

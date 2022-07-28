@@ -1,0 +1,7 @@
+{
+    "/AddressBook/GetAll":"/employees",
+    "/AddressBook/GetId/:id":"/employees/:id",
+    "/AddressBook/AddEmployee":"/employees",
+    "/AddressBook/UpdateEmployee/:id":"/employees/:id",
+    "/AddressBook/DeleteEmployee/:id":"/employees/:id"
+    }
